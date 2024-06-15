@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Answers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .answer {
+            margin-bottom: 20px;
+        }
+        .answer h2 {
+            color: #333;
+        }
+        .answer pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Programming Answers</h1>
+        
+        <div class="answer">
+            <h2>Special ATM Question</h2>
+            <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int balance, limit, withdraw;
+
+    printf("Enter current balance: ");
+    scanf("%d", &balance);
+    
+    printf("Enter maximum withdrawal limit: ");
+    scanf("%d", &limit);
+    
+    printf("Enter amount to withdraw: ");
+    scanf("%d", &withdraw);
+
+    if (withdraw > balance) {
+        printf("Insufficient funds\n");
+    } else if (withdraw > limit) {
+        printf("Amount exceeds withdrawal limit\n");
+    } else {
+        balance -= withdraw;
+        printf("Transaction successful. Remaining balance: %d\n", balance);
+    }
+
+    return 0;
+}
+            </pre>
+        </div>
+
+        <div class="answer">
+            <h2>Intermediate Level Question 1: Matrix Multiplication</h2>
+            <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int r1, c1, r2, c2;
+
+    printf("Enter dimensions of the first matrix (r1 c1): ");
+    scanf("%d %d", &r1, &c1);
+    printf("Enter dimensions of the second matrix (r2 c2): ");
+    scanf("%d %d", &r2, &c2);
+
+    if (c1 != r2) {
+        printf("Invalid dimensions\n");
+        return 1;
+    }
+
+    int A[r1][c1], B[r2][c2], C[r1][c2];
+
+    printf("Enter elements of the first matrix:\n");
+    for (int i = 0; i < r1; i++) {
+        for (int j = 0; j < c1; j++) {
+            scanf("%d", &A[i][j]);
+        }
+    }
+
+    printf("Enter elements of the second matrix:\n");
+    for (int i = 0; i < r2; i++) {
+        for (int j = 0; j < c2; j++) {
+            scanf("%d", &B[i][j]);
+        }
+    }
+
+    // Initialize the result matrix C to zero
+    for (int i = 0; i < r1; i++) {
+        for (int j = 0; j < c2; j++) {
+            C[i][j] = 0;
+        }
+    }
+
+    // Perform matrix multiplication
+    for (int i = 0; i < r1; i++) {
+        for (int j = 0; j < c2; j++) {
+            for (int k = 0; k < c1; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+
+    printf("Resulting matrix:\n");
+    for (int i = 0; i < r1; i++) {
+        for (int j = 0; j < c2; j++) {
+            printf("%d ", C[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+            </pre>
+        </div>
+
+        <div class="answer">
+            <h2>Intermediate Level Question 2: Longest Increasing Subsequence</h2>
+            <pre>
+#include &lt;stdio.h&gt;
+
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+int main() {
+    int n;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    printf("Enter the elements:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int lis[n];
+    for (int i = 0; i < n; i++) {
+        lis[i] = 1;
+    }
+
+    for (int i = 1; i < n; i++) {
+        for (int j = 0; j < i; j++) {
+            if (arr[i] > arr[j] && lis[i] < lis[j] + 1) {
+                lis[i] = lis[j] + 1;
+            }
+        }
+    }
+
+    int max_lis = 0;
+    for (int i = 0; i < n; i++) {
+        max_lis = max(max_lis, lis[i]);
+    }
+
+    printf("Length of the longest increasing subsequence: %d\n", max_lis);
+
+    return 0;
+}
+            </pre>
+        </div>
+
+        <div class="answer">
+            <h2>Easy Level Question 1: Sum of Digits</h2>
+            <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int n, sum = 0;
+    
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    
+    while (n > 0) {
+        sum += n % 10;
+        n /= 10;
+    }
+    
+    printf("Sum of digits: %d\n", sum);
+    
+    return 0;
+}
+            </pre>
+        </div>
+
+        <div class="answer">
+            <h2>Easy Level Question 2: Reverse a String</h2>
+            <pre>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char str[101];
+    
+    printf("Enter a string: ");
+    scanf("%s", str);
+    
+    int len = strlen(str);
+    
+    printf("Reversed string: ");
+    for (int i = len - 1; i >= 0; i--) {
+        putchar(str[i]);
+    }
+    printf("\n");
+    
+    return 0;
+}
+            </pre>
+        </div>
+
+        <div class="answer">
+            <h2>Easy Level Question 3: Prime Number Check</h2>
+            <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int n, isPrime = 1;
+    
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    
+    if (n <= 1) {
+        isPrime = 0;
+    } else {
+        for (int i = 2; i <= n / 2; i++) {
+            if (n % i == 0) {
+                isPrime = 0;
+                break;
+            }
+        }
+    }
+    
+    if (isPrime) {
+        printf("Prime\n");
+    } else {
+        printf("Not Prime\n");
+    }
+    
+    return 0;
+}
+            </pre>
+        </div>
+    </div>
+</body>
+</html>
